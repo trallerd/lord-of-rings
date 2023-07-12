@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:dartz/dartz.dart';
@@ -13,7 +11,7 @@ import 'package:lord_of_rings/utils/utils.dart';
 class BookDatasource implements BookDatasourceI {
   @override
   Future<Either<Failure, GetBooks>> getAllBooks() async {
-    var url = Uri.https(baseUrl(), '/book');
+    var url = Uri.parse('${baseUrl()}/book');
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
@@ -28,7 +26,7 @@ class BookDatasource implements BookDatasourceI {
 
   @override
   Future<Either<Failure, BookByID>> getBookByID(String id) async {
-    var url = Uri.https(baseUrl(), '/book/$id');
+    var url = Uri.parse('${baseUrl()}/book/$id');
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
@@ -43,7 +41,7 @@ class BookDatasource implements BookDatasourceI {
 
   @override
   Future<Either<Failure, ChaptersBook>> getBooksChapters(String id) async {
-    var url = Uri.https(baseUrl(), 'book/$id/chapter');
+    var url = Uri.parse('${baseUrl()}/book/$id/chapter');
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
